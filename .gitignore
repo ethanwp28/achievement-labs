@@ -1,0 +1,14 @@
+# Release binaries are uploaded as GitHub Release assets, never committed.
+*.exe
+*.dll
+*.pdb
+*.zip
+
+# Keep source and private data out of this release-only repository.
+src/
+Events/
+Data.json
+titleid.json
+*.db
+*.sqlite
+.env
