@@ -1,14 +1,12 @@
-# Release binaries are uploaded as GitHub Release assets, never committed.
+# This repository carries releases and documentation, not source or binaries.
+# Build artifacts are attached to GitHub Releases, never committed.
+*.zip
 *.exe
 *.dll
 *.pdb
-*.zip
+*.msi
 
-# Keep source and private data out of this release-only repository.
-src/
-Events/
-Data.json
-titleid.json
-*.db
-*.sqlite
-.env
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
