@@ -19,10 +19,10 @@
   </ItemGroup>
 <ItemGroup><ProjectReference Include="../AchievementLabs.Core/AchievementLabs.Core.csproj" /></ItemGroup><ItemGroup>
 <AvaloniaResource Include="../AchievementLabs.App/Assets/achievement-labs-icon.png" Link="Assets/achievement-labs-logo.png"/>
-<AvaloniaResource Include="../../images.jpg" Link="Assets/xbox-logo.jpg"/>
-<AvaloniaResource Include="../../Steam_icon_logo.svg.webp" Link="Assets/steam-logo.webp"/>
-<AvaloniaResource Include="../../Epic_Games_Store_logo_2023_vertical_black.png" Link="Assets/epic-logo.png"/>
-<AvaloniaResource Include="../../Ubisoft_logo.png" Link="Assets/ubisoft-logo.png"/>
+<AvaloniaResource Include="../AchievementLabs.App/Assets/xbox-logo.jpg" Link="Assets/xbox-logo.jpg"/>
+<AvaloniaResource Include="../AchievementLabs.App/Assets/steam-logo.webp" Link="Assets/steam-logo.webp"/>
+<AvaloniaResource Include="../AchievementLabs.App/Assets/epic-logo.png" Link="Assets/epic-logo.png"/>
+<AvaloniaResource Include="../AchievementLabs.App/Assets/ubisoft-logo.png" Link="Assets/ubisoft-logo.png"/>
 <EmbeddedResource Include="../../site/assets/games.json" LogicalName="AchievementLabs.PublicCatalog.json"/>
 <!-- Private event recipes are served by the licensing API, never packaged. -->
 <Content Include="../AchievementLabs.App/StatsCatalog/**/*.*" LinkBase="StatsCatalog" CopyToOutputDirectory="PreserveNewest"/>
