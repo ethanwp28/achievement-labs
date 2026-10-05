@@ -29,7 +29,7 @@
 <Content Include="../../gfwlam/**/*.*" LinkBase="gfwlam" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../tools/Submit-ColdAlleyAchievements.ps1" Link="tools/Submit-ColdAlleyAchievements.ps1" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../uplayachievements/**/*.*" LinkBase="uplayachievements" CopyToOutputDirectory="PreserveNewest"/>
-<Content Include="../../Uplay spools/**/*.spool" LinkBase="Uplay spools" CopyToOutputDirectory="PreserveNewest"/>
+<Content Include="../../uplay-spools/**/*.spool" LinkBase="uplay-spools" CopyToOutputDirectory="PreserveNewest"/>
 </ItemGroup>
 <Target Name="BuildNativeHelpers" Condition="'$(LabsSingleFile)' != 'true'" BeforeTargets="Build">
 <RemoveDir Directories="$(MSBuildProjectDirectory)/obj/steam-idle;$(MSBuildProjectDirectory)/obj/gfwl-injector" />

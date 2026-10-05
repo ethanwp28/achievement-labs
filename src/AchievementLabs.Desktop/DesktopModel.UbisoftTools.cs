@@ -21,7 +21,7 @@ public sealed partial class DesktopModel
 
     public void LoadUbisoftTools()
     {
-        var root = Path.Combine(AppContext.BaseDirectory, "Uplay spools");
+        var root = Path.Combine(AppContext.BaseDirectory, "uplay-spools");
         UbisoftSpools = Directory.Exists(root)
             ? Directory.EnumerateFiles(root, "*.spool", SearchOption.AllDirectories)
                 .Select(path => new UbisoftSpoolItem(Path.GetFileNameWithoutExtension(path), Path.GetRelativePath(root, path), path))
