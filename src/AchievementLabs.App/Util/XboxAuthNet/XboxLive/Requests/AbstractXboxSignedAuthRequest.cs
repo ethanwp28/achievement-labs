@@ -13,6 +13,7 @@ public abstract class AbstractXboxSignedAuthRequest
     public XboxAuthResponseHandler ResponseHandler { get; set; } = new();
     protected abstract string RequestUrl { get; }
     protected virtual string Token { get; } = "";
+    protected virtual string ContractVersion => "1";
 
     public async Task<T> Send<T>(HttpClient httpClient, IXboxRequestSigner signer)
     {
@@ -43,7 +44,7 @@ public abstract class AbstractXboxSignedAuthRequest
 
         var signature = signer.SignRequest(RequestUrl, Token, bodyStr);
         req.Headers.Add("Signature", signature);
-        req.Headers.Add("x-xbl-contract-version", "1");
+        req.Headers.Add("x-xbl-contract-version", ContractVersion);
         return req;
     }
 

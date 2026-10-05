@@ -137,6 +137,31 @@ public sealed partial class DesktopModel
         }
         catch { savedEventsToken = ""; EventTokenStatus = "The saved event token could not be read."; }
     }
+    private bool grabbingEventToken;
+    public bool GrabbingEventToken { get => grabbingEventToken; private set { grabbingEventToken = value; Changed(); Changed(nameof(CanGrabEventToken)); } }
+    public bool CanGrabEventToken => !GrabbingEventToken;
+    public async Task GrabEventTokenAsync()
+    {
+        if (GrabbingEventToken) return;
+        GrabbingEventToken = true;
+        try
+        {
+            EventTokenStatus = "Requesting an event token from the Microsoft account signed in on this PC…";
+            var token = await WamEventTokenGrabber.GrabAsync(lifetime.Token);
+            EventTokenInput = token;
+            await SaveEventTokenAsync();
+        }
+        catch (OperationCanceledException) { EventTokenStatus = "Event token grab was cancelled."; }
+        catch (Exception ex) { EventTokenStatus = "Could not grab an event token. " + SafeGrabMessage(ex); }
+        finally { GrabbingEventToken = false; }
+    }
+    private static string SafeGrabMessage(Exception ex)
+    {
+        var message = ex.Message ?? "";
+        if (message.Contains("XBL3.0", StringComparison.OrdinalIgnoreCase) || message.Contains("eyJ", StringComparison.Ordinal) || message.Length > 240)
+            return "Xbox rejected the request. Sign in to the Xbox app and try again.";
+        return message;
+    }
     public async Task SaveEventTokenAsync()
     {
         if (!EventTokenValidator.TryNormalize(EventTokenInput, out var value)) { EventTokenStatus = "The event token format could not be recognized. Copy the complete x:XBL3.0 value."; return; }

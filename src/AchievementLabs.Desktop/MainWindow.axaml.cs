@@ -228,6 +228,7 @@ public partial class MainWindow : Window
     private void ShowSettings(object? s, RoutedEventArgs e) => model.Navigate("Settings");
     private void ShowDiagnostics(object? s, RoutedEventArgs e) => model.Navigate("Diagnostics");
     private async void SaveSettings(object? s, RoutedEventArgs e) => await model.SavePreferencesAsync();
+    private async void GrabEventToken(object? s, RoutedEventArgs e) => await model.GrabEventTokenAsync();
     private async void SaveEventToken(object? s, RoutedEventArgs e) => await model.SaveEventTokenAsync();
     private void ClearEventToken(object? s, RoutedEventArgs e) => model.ClearEventToken();
     private async Task ShowEventTokenRequiredAsync()
@@ -237,7 +238,7 @@ public partial class MainWindow : Window
         var cancel = new Button { Content = "Cancel" };
         openSettings.Click += (_, _) => dialog.Close(true);
         cancel.Click += (_, _) => dialog.Close(false);
-        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = { new TextBlock { Text = "An event token is needed", FontSize = 22 }, new TextBlock { Text = "Paste a current event token in Settings before unlocking an event-based achievement. The saved token is encrypted for your Windows account.", TextWrapping = TextWrapping.Wrap }, new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openSettings, cancel } } } } };
+        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = { new TextBlock { Text = "An event token is needed", FontSize = 22 }, new TextBlock { Text = "Use Grab event token in Settings, or paste a current token. The saved token is encrypted for your Windows account.", TextWrapping = TextWrapping.Wrap }, new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openSettings, cancel } } } } };
         if (await dialog.ShowDialog<bool>(this)) model.Navigate("Settings");
     }
     private async void TestEventReplacements(object? s, RoutedEventArgs e) => await model.TestEventReplacementsAsync();

@@ -41,6 +41,13 @@ public class XboxSignedClient
     public Task<XboxAuthResponse> RequestDeviceToken(XboxDeviceTokenRequest request) =>
         request.Send(_httpClient, _signer);
 
+    public Task<XboxAuthResponse> RequestRpsDeviceToken(string accessToken, string deviceVersion) =>
+        new XboxRpsDeviceTokenRequest
+        {
+            AccessToken = accessToken,
+            DeviceVersion = deviceVersion
+        }.Send(_httpClient, _signer);
+
     public Task<XboxAuthResponse> RequestSignedXsts(XboxSignedXstsRequest request) =>
         request.Send(_httpClient, _signer);
 
