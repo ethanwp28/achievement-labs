@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repo $OutputDirectory
 $data = Get-Content -LiteralPath (Join-Path $repo 'src/AchievementLabs.App/Events/Data.json') -Raw | ConvertFrom-Json -AsHashtable
-$catalog = Get-Content -LiteralPath (Join-Path $repo 'XboxTitleIDs.json') -Raw | ConvertFrom-Json
+$catalog = Get-Content -LiteralPath (Join-Path $repo 'data/XboxTitleIDs.json') -Raw | ConvertFrom-Json
 $byId = @{}
 foreach ($entry in $catalog) { $byId[[string]$entry.TitleId] = $entry }
 
