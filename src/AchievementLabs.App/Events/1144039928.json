@@ -16,16 +16,31 @@
             "dataType": 1,
             "isRequired": false
         },
-        "metadata": REPLACEMETADATA,
+        "metadata": {
+            "f": {
+                "baseData": {
+                    "f": {
+                        "properties": {
+                            "f": {
+                                "AchievementId": 1
+                            }
+                        },
+                        "ver": 1
+                    }
+                }
+            },
+            "privTags": 1,
+            "policies": 0
+        },
         "os": {
             "bootId": 1,
-            "name": "Windows",
+            "name": "1",
             "ver": "1",
             "expId": "1"
         },
         "app": {
-            "id": "U:Microsoft.Chelan_1.3385.0.0_x64__8wekyb3d8bbwe!HaloMCCShipping",
-            "ver": "1.3385.0.0_x64_!2024/01/03:17:50:38!3E58AE2!mccwinstore-win64-shipping.exe",
+            "id": "U:Microsoft.Chelan_1.3528.0.0_x64__8wekyb3d8bbwe!HaloMCCShipping",
+            "ver": "1.3528.0.0_x64_!2024/01/03:17:50:38!3E58AE2!mccwinstore-win64-shipping.exe",
             "is1P": 1,
             "asId": 1
         },
