@@ -40,26 +40,16 @@ commands; the last leaderboard remains visible.
 
 ## GitHub updates
 
-The [GitHub Actions workflow](../.github/workflows/discord-github-updates.yml)
-posts to a Discord incoming webhook through
-[`tools/post-discord-github-update.mjs`](../tools/post-discord-github-update.mjs).
-It announces:
+The repository uses GitHub's direct webhook integration with Discord. In
+`#github`, open **Edit Channel → Integrations → Webhooks** and copy the
+**Achievement Labs GitHub** webhook URL. In the GitHub repository, open
+**Settings → Webhooks → Add webhook**, append `/github` to the Discord URL,
+choose `application/json`, and select the **Pushes**, **Pull requests**, and
+**Releases** events. Keep SSL verification and the webhook active. The webhook
+ID for this setup is `693309026`.
 
-- PR opened, reopened, marked ready for review, merged, or closed;
-- each push to the default `main` branch, with up to five commit summaries;
-- a published release or pre-release.
-
-In `#github`, open **Edit Channel → Integrations → Webhooks → New
-Webhook**, select that channel, and copy its URL. In the GitHub repository open
-**Settings → Secrets and variables → Actions → New repository secret**. Name it
-`DISCORD_GITHUB_WEBHOOK_URL` and paste the URL. Treat the URL like a password:
-anyone holding it can post to the channel. Do not put it in a file or commit.
-
-The workflow must be on the repository's default branch before it can run. It
-reads PR metadata but never checks out a contributor's PR code, so fork PRs
-cannot execute code with the Discord webhook secret. It requests only
-`contents: read` GitHub permissions. It does not announce PR comments or
-reviews, and commit posts are limited to `main` to keep the channel readable.
-
-After setup, use a harmless test PR or commit to verify delivery. A missing or
-invalid secret makes the job fail without printing the webhook URL.
+The URL is a posting credential: anyone holding it can post to `#github`.
+Keep it out of source control and public messages. GitHub delivers event data
+directly to Discord, so this integration does not depend on GitHub Actions.
+GitHub's webhook deliveries page shows each response; Discord should return
+`204` for accepted events. Push events cover all branches.
