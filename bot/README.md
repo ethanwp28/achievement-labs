@@ -112,11 +112,11 @@ the vote data.
 
 ## Hosting
 
-The Debian Docker VM runs this bot from `/opt/achievement-labs-request-bot`
-with [`compose.yaml`](compose.yaml). It opens no inbound ports. Docker is enabled
-at boot, and the container's `unless-stopped` policy restarts it after crashes
-and host reboots unless it is explicitly stopped. The Compose file sets DNS
-for this container because the VM's Docker resolver has no upstream server.
+Run this bot on a Docker host with [`compose.yaml`](compose.yaml). It opens no
+inbound ports. Enable Docker at boot; the container's `unless-stopped` policy
+restarts it after crashes and host reboots unless it is explicitly stopped.
+The Compose file sets DNS for this container to avoid depending on the host's
+Docker resolver configuration.
 Keep `.env`, `config.json`, and `data/store.json` on the host; all three are
 outside the image and must survive rebuilds. Only the data directory is
 writable inside the container.
