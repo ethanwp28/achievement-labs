@@ -112,11 +112,22 @@ the vote data.
 
 ## Hosting
 
-It is a single long-lived process with no inbound ports, so anything that keeps
-Node running works: a small VPS with systemd, a Docker container, Railway, or
-Fly.io. It needs roughly 100 MB of RAM and a persistent disk (or volume) for
-`data/`.
+The Debian Docker VM runs this bot from `/opt/achievement-labs-request-bot`
+with [`compose.yaml`](compose.yaml). It opens no inbound ports. Docker is enabled
+at boot, and the container's `unless-stopped` policy restarts it after crashes
+and host reboots unless it is explicitly stopped. The Compose file sets DNS
+for this container because the VM's Docker resolver has no upstream server.
+Keep `.env`, `config.json`, and `data/store.json` on the host; all three are
+outside the image and must survive rebuilds. Only the data directory is
+writable inside the container.
 
-If the host has no persistent disk, the catalog and all votes are lost on
-redeploy. Check that before picking one.
+To deploy an update, copy the new `package.json`, `package-lock.json`,
+`Dockerfile`, `compose.yaml`, `.dockerignore`, and `src/` to the host. Do not
+replace the three local state files. From the host's bot directory, run
+`docker compose up -d --build`, then check `docker compose logs --tail=50`.
+Use `docker compose ps` to check status, and `docker compose restart` to restart
+it without rebuilding. Keep the local PC copy stopped after migration.
+Before migration, stop the old process so two copies never write separate vote
+stores or respond to the same interaction. Back up `data/store.json` before
+each migration or restore.
 
